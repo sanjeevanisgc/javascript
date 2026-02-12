@@ -10,6 +10,8 @@ The order of each value list should be the order the items appear in the array. 
 
 Please solve it without lodash's _.groupBy function.
 */
+
+/*          Method : 1      */
 Array.prototype.groupBy = function(fn) {
     const ans = {};
     for(let e of this){
@@ -19,6 +21,21 @@ Array.prototype.groupBy = function(fn) {
     }
     return ans;
 };
+
+/*      Method : 2          */
+
+Array.prototype.groupBy2 = function(fn){
+    return this.reduce((grouped, item) => {
+        const key = fn(item);
+        grouped[key] ||= [];
+        grouped[key].push(item);
+
+        return grouped;
+
+    },{});
+}
+
+
 
 let array = [
   [1, 2, 3],
@@ -37,7 +54,7 @@ fn = function (n) {
   return String(n > 5);
 };
 
-console.log(array.groupBy(fn));
+console.log(array.groupBy2(fn));
 
 
 array = [
